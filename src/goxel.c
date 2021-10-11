@@ -1368,3 +1368,28 @@ ACTION_REGISTER(toggle_mode,
     .flags = ACTION_CAN_EDIT_SHORTCUT,
     .cfunc = toggle_mode,
 )
+
+static void mode_add(void) { goxel.painter.mode = MODE_OVER; }
+static void mode_sub(void) { goxel.painter.mode = MODE_SUB; }
+static void mode_paint(void) { goxel.painter.mode = MODE_PAINT; }
+
+ACTION_REGISTER(mode_add,
+    .help = "Set tool mode to add",
+    .flags = ACTION_CAN_EDIT_SHORTCUT,
+    .cfunc = mode_add,
+    .default_shortcut = "Q",
+)
+
+ACTION_REGISTER(mode_sub,
+    .help = "Set tool mode to sub",
+    .flags = ACTION_CAN_EDIT_SHORTCUT,
+    .cfunc = mode_sub,
+    .default_shortcut = "W",
+)
+
+ACTION_REGISTER(mode_paint,
+    .help = "Set tool mode to paint",
+    .flags = ACTION_CAN_EDIT_SHORTCUT,
+    .cfunc = mode_paint,
+    .default_shortcut = "E",
+)
