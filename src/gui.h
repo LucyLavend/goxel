@@ -43,6 +43,8 @@ void gui_render(void);
 
 void gui_request_panel_width(float width);
 
+int gui_symmetry(void);
+
 bool gui_panel_header(const char *label);
 
 void gui_canvas(float w, float h,

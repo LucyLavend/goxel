@@ -24,9 +24,9 @@ static int gui_mode_select(void)
 {
 
     gui_choice_begin("Mode", &goxel.painter.mode, false);
-    gui_choice("Add", MODE_OVER, ICON_MODE_ADD);
-    gui_choice("Sub", MODE_SUB, ICON_MODE_SUB);
-    gui_choice("Paint", MODE_PAINT, ICON_MODE_PAINT);
+    gui_choice("Add (Default shortcut: W)", MODE_OVER, ICON_MODE_ADD);
+    gui_choice("Sub (Default shortcut: E)", MODE_SUB, ICON_MODE_SUB);
+    gui_choice("Paint (Default shortcut: R)", MODE_PAINT, ICON_MODE_PAINT);
     gui_choice_end();
     return 0;
 }
@@ -43,11 +43,13 @@ void gui_top_bar(void)
     gui_same_line();
     gui_color("##color", goxel.painter.color);
     gui_same_line();
+    gui_symmetry();
+    gui_same_line();
     gui_checkbox_flag("Unlit",
-            &goxel.rend.settings.effects, EFFECT_UNLIT, NULL);
+            &goxel.rend.settings.effects, EFFECT_UNLIT, "Default shortcut: F");
     gui_same_line();
     gui_checkbox_flag("Marching Cubes",
-            &goxel.rend.settings.effects, EFFECT_MARCHING_CUBES, NULL);
+            &goxel.rend.settings.effects, EFFECT_MARCHING_CUBES, "Default shortcut: G");
 }
 
 #endif // GUI_CUSTOM_TOPBAR

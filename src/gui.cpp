@@ -1144,7 +1144,6 @@ bool gui_checkbox_flag(const char *label, int *v, int flag, const char *hint)
     return ret;
 }
 
-
 bool gui_button(const char *label, float size, int icon)
 {
     bool ret;
@@ -1420,6 +1419,25 @@ void gui_bottom_text(const char *txt)
 void gui_request_panel_width(float width)
 {
     goxel.gui.panel_width = width;
+}
+
+int gui_symmetry(void)
+{
+    float w;
+    int i;
+    bool v;
+    const char *labels_u[] = {"X", "Y", "Z"};
+    const char *labels_l[] = {"x", "y", "z"};
+    w = 60.0;
+    gui_group_begin(NULL);
+    for (i = 0; i < 3; i++) {
+        v = (goxel.painter.symmetry >> i) & 0x1;
+        if (gui_selectable(labels_u[i], &v, NULL, w))
+            set_flag(&goxel.painter.symmetry, 1 << i, v);
+        if (i < 2) gui_same_line();
+    }
+    gui_group_end();
+    return 0;
 }
 
 bool gui_layer_item(int i, int icon, bool *visible, bool *edit,

@@ -1397,8 +1397,7 @@ ACTION_REGISTER(mode_paint,
 
 void toggle(int *v, int flag)
 {
-    bool b;
-    b = (*v) & flag;
+    bool b = (*v) & flag;
     if (b) *v |= flag;
     else   *v &= ~flag;
     printf("%i\n", *v);
@@ -1406,13 +1405,12 @@ void toggle(int *v, int flag)
 
 static void toggle_unlit(void)
 {
-  //TODO: implement it Actually
-    //toggle(&goxel.rend.settings.effects, EFFECT_UNLIT);
+    toggle(&goxel.rend.settings.effects, EFFECT_UNLIT);
 }
 
 static void toggle_mc(void)
 {
-    //toggle(&goxel.rend.settings.effects, EFFECT_UNLIT);
+    toggle(&goxel.rend.settings.effects, EFFECT_MARCHING_CUBES);
 }
 
 ACTION_REGISTER(toggle_unlit,
