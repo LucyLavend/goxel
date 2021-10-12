@@ -42,6 +42,12 @@ void gui_top_bar(void)
     gui_mode_select();
     gui_same_line();
     gui_color("##color", goxel.painter.color);
+    gui_same_line();
+    gui_checkbox_flag("Unlit",
+            &goxel.rend.settings.effects, EFFECT_UNLIT, NULL);
+    gui_same_line();
+    gui_checkbox_flag("Marching Cubes",
+            &goxel.rend.settings.effects, EFFECT_MARCHING_CUBES, NULL);
 }
 
 #endif // GUI_CUSTOM_TOPBAR

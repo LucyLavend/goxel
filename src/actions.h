@@ -66,6 +66,8 @@ enum {
     X(mode_add),
     X(mode_sub),
     X(mode_paint),
+    X(toggle_unlit),
+    X(toggle_mc),
     X(export_render_buf_to_photos),
     X(open),
     X(save_as),

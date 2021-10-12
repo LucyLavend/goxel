@@ -23,6 +23,7 @@
 #include "shader_cache.h"
 
 #include <stdarg.h>
+#include <stdio.h>
 
 // The global goxel instance.
 goxel_t goxel = {};
@@ -1377,19 +1378,53 @@ ACTION_REGISTER(mode_add,
     .help = "Set tool mode to add",
     .flags = ACTION_CAN_EDIT_SHORTCUT,
     .cfunc = mode_add,
-    .default_shortcut = "Q",
+    .default_shortcut = "W",
 )
 
 ACTION_REGISTER(mode_sub,
     .help = "Set tool mode to sub",
     .flags = ACTION_CAN_EDIT_SHORTCUT,
     .cfunc = mode_sub,
-    .default_shortcut = "W",
+    .default_shortcut = "E",
 )
 
 ACTION_REGISTER(mode_paint,
     .help = "Set tool mode to paint",
     .flags = ACTION_CAN_EDIT_SHORTCUT,
     .cfunc = mode_paint,
-    .default_shortcut = "E",
+    .default_shortcut = "R",
+)
+
+void toggle(int *v, int flag)
+{
+    bool b;
+    b = (*v) & flag;
+    if (b) *v |= flag;
+    else   *v &= ~flag;
+    printf("%i\n", *v);
+}
+
+static void toggle_unlit(void)
+{
+  //TODO: implement it Actually
+    //toggle(&goxel.rend.settings.effects, EFFECT_UNLIT);
+}
+
+static void toggle_mc(void)
+{
+    //toggle(&goxel.rend.settings.effects, EFFECT_UNLIT);
+}
+
+ACTION_REGISTER(toggle_unlit,
+  .help = "Toggle unlit view mode",
+  .flags = ACTION_CAN_EDIT_SHORTCUT,
+  .cfunc = toggle_unlit,
+  .default_shortcut = "F",
+)
+
+ACTION_REGISTER(toggle_mc,
+    .help = "Toggle marching cubes view mode",
+    .flags = ACTION_CAN_EDIT_SHORTCUT,
+    .cfunc = toggle_mc,
+    .default_shortcut = "G",
 )
