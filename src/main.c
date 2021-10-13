@@ -274,6 +274,8 @@ int main(int argc, char **argv)
     glfwSetErrorCallback(on_glfw_error);
     glfwInit();
     glfwWindowHint(GLFW_SAMPLES, 4);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
     monitor = glfwGetPrimaryMonitor();
     mode = glfwGetVideoMode(monitor);
     if (mode) {
