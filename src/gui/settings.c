@@ -30,6 +30,7 @@ static int shortcut_callback(action_t *action, void *user)
     // XXX: need to check if the inputs are valid!
     gui_input_text("", action->shortcut, sizeof(action->shortcut));
     gui_next_column();
+    gui_separator();
     gui_pop_id();
     return 0;
 }
