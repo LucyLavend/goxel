@@ -1004,8 +1004,8 @@ static void render_background(renderer_t *rend, const uint8_t col[4])
     // Add a small gradient to the color.
     vec4_set(c1, col[0] / 255., col[1] / 255., col[2] / 255., col[3] / 255.);
     vec4_set(c2, col[0] / 255., col[1] / 255., col[2] / 255., col[3] / 255.);
-    vec3_iadd(c1, VEC(+0.2, +0.2, +0.2));
-    vec3_iadd(c2, VEC(-0.2, -0.2, -0.2));
+    // vec3_iadd(c1, VEC(+0.2, +0.2, +0.2));
+    // vec3_iadd(c2, VEC(-0.2, -0.2, -0.2));
 
     vertices[0] = (vertex_t){{-1, -1, 0}, {c1[0], c1[1], c1[2], c1[3]}};
     vertices[1] = (vertex_t){{+1, -1, 0}, {c1[0], c1[1], c1[2], c1[3]}};
