@@ -164,4 +164,3 @@ void gui_app(void)
         gui_rotation_bar();
     }
 }
-

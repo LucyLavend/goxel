@@ -1398,7 +1398,7 @@ ACTION_REGISTER(mode_paint,
 void toggle(int *v, int flag)
 {
     bool b = (*v) & flag;
-    if (b) *v |= flag;
+    if (!b) *v |= flag;
     else   *v &= ~flag;
     printf("%i\n", *v);
 }
