@@ -1400,7 +1400,6 @@ void toggle(int *v, int flag)
     bool b = (*v) & flag;
     if (!b) *v |= flag;
     else   *v &= ~flag;
-    printf("%i\n", *v);
 }
 
 static void toggle_unlit(void)

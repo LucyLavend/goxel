@@ -28,7 +28,7 @@
 #include "inputs.h"
 
 #ifndef GUI_PANEL_WIDTH_NORMAL
-#   define GUI_PANEL_WIDTH_NORMAL 190
+#   define GUI_PANEL_WIDTH_NORMAL 200
 #endif
 
 #ifndef GUI_PANEL_WIDTH_LARGE
@@ -120,6 +120,7 @@ bool gui_layer_item(int i, int icon, bool *visible, bool *edit,
 
 bool gui_is_key_down(int key);
 bool gui_palette_entry(const uint8_t color[4], uint8_t target[4]);
+void gui_palette_panel(void);
 
 bool gui_need_full_version(void);
 

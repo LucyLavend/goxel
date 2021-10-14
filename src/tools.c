@@ -111,24 +111,26 @@ static bool snap_button(const char *label, int s, float w)
 int tool_gui_snap(void)
 {
     float w, v;
-    gui_text("Snap on");
-    w = gui_get_avail_width() / 2.0 - 1;
-    gui_group_begin(NULL);
-    snap_button("Mesh", SNAP_MESH, w);
-    gui_same_line();
-    snap_button("Plane", SNAP_PLANE, w);
-    if (!box_is_null(goxel.selection)) {
-        snap_button("Sel In", SNAP_SELECTION_IN, w);
+    if (gui_collapsing_header("Snap on", false)){
+        w = gui_get_avail_width() / 2.0 - 1;
+        gui_group_begin(NULL);
+        snap_button("Mesh", SNAP_MESH, w);
         gui_same_line();
-        snap_button("Sel out", SNAP_SELECTION_OUT, w);
-    }
-    if (!box_is_null(goxel.image->box))
-        snap_button("Image box", SNAP_IMAGE_BOX, -1);
+        snap_button("Plane", SNAP_PLANE, w);
+        if (!box_is_null(goxel.selection)) {
+            snap_button("Sel In", SNAP_SELECTION_IN, w);
+            gui_same_line();
+            snap_button("Sel out", SNAP_SELECTION_OUT, w);
+        }
+        if (!box_is_null(goxel.image->box))
+            snap_button("Image box", SNAP_IMAGE_BOX, -1);
 
-    v = goxel.snap_offset;
-    if (gui_input_float("Offset", &v, 0.1, -1, +1, "%.1f"))
-        goxel.snap_offset = clamp(v, -1, +1);
-    gui_group_end();
+        v = goxel.snap_offset;
+        if (gui_input_float("Offset", &v, 0.1, -1, +1, "%.1f"))
+            goxel.snap_offset = clamp(v, -1, +1);
+        gui_group_end();
+      }
+
     return 0;
 }
 
@@ -152,17 +154,19 @@ int tool_gui_shape(const shape_t **shape)
     shape = shape ?: &goxel.painter.shape;
     int i, ret = 0;
     bool v;
-    gui_text("Shape");
-    gui_group_begin(NULL);
-    for (i = 0; i < (int)ARRAY_SIZE(shapes); i++) {
-        v = *shape == shapes[i].shape;
-        if (gui_selectable_icon(shapes[i].name, &v, shapes[i].icon)) {
-            *shape = shapes[i].shape;
-            ret = 1;
-        }
-        auto_grid(ARRAY_SIZE(shapes), i, 4);
+
+    if (gui_collapsing_header("Draw shape", false)){
+      gui_group_begin(NULL);
+      for (i = 0; i < (int)ARRAY_SIZE(shapes); i++) {
+          v = *shape == shapes[i].shape;
+          if (gui_selectable_icon(shapes[i].name, &v, shapes[i].icon)) {
+              *shape = shapes[i].shape;
+              ret = 1;
+          }
+          auto_grid(ARRAY_SIZE(shapes), i, 4);
+      }
+      gui_group_end();
     }
-    gui_group_end();
     return ret;
 }
 
@@ -207,18 +211,21 @@ int tool_gui_symmetry(void)
     const char *labels_u[] = {"X", "Y", "Z"};
     const char *labels_l[] = {"x", "y", "z"};
     w = gui_get_avail_width() / 3.0 - 1;
-    gui_group_begin("Symmetry");
-    for (i = 0; i < 3; i++) {
-        v = (goxel.painter.symmetry >> i) & 0x1;
-        if (gui_selectable(labels_u[i], &v, NULL, w))
-            set_flag(&goxel.painter.symmetry, 1 << i, v);
-        if (i < 2) gui_same_line();
+
+    if (gui_collapsing_header("Symmetry", true)){
+        gui_group_begin(NULL);
+        for (i = 0; i < 3; i++) {
+            v = (goxel.painter.symmetry >> i) & 0x1;
+            if (gui_selectable(labels_u[i], &v, NULL, w))
+                set_flag(&goxel.painter.symmetry, 1 << i, v);
+            if (i < 2) gui_same_line();
+        }
+        for (i = 0; i < 3; i++) {
+            gui_input_float(labels_l[i], &goxel.painter.symmetry_origin[i],
+                             0.5, -FLT_MAX, +FLT_MAX, "%.1f");
+        }
+        gui_group_end();
     }
-    for (i = 0; i < 3; i++) {
-        gui_input_float(labels_l[i], &goxel.painter.symmetry_origin[i],
-                         0.5, -FLT_MAX, +FLT_MAX, "%.1f");
-    }
-    gui_group_end();
     return 0;
 }
 

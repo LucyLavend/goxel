@@ -75,4 +75,3 @@ void gui_tools_panel(void)
     if (gui_collapsing_header(goxel.tool->name, true))
         tool_gui(goxel.tool);
 }
-

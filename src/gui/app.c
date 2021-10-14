@@ -17,6 +17,7 @@
  */
 
 #include "goxel.h"
+#include <stdio.h>
 
 #ifndef GUI_HAS_ROTATION_BAR
 #   define GUI_HAS_ROTATION_BAR 0
@@ -112,6 +113,13 @@ static void render_left_panel(void)
             goxel.gui.current_panel = NULL;
         else
             goxel.gui.current_panel();
+
+        if (current_i != 2){
+            if (gui_collapsing_header("Palette", true)){
+                gui_palette_panel();
+            }
+        }
+
         gui_pop_id();
         gui_pop_id();
         gui_div_end();
